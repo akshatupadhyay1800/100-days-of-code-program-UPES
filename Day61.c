@@ -1,0 +1,56 @@
+﻿/*
+ * 100 Days of Code - UPES
+ * Day 61 | Date: 13-Oct-2026
+ *
+ * Q111: Write a program to take an integer array arr and an integer k as inputs. The task is to find the first negative integer in each subarray of size k moving from left to right. If no negative exists in a window, print "0" for that window. Print the results separated by spaces as output.
+ *
+ * Sample Test Cases:
+ * Input 1:
+ * arr[] = [-8, 2, 3, -6, 10], k = 2
+ * Output 1:
+ * -8 0 -6 -6
+ * Explanation 1:
+ * Window [-8, 2] First negative integer is -8. Window No negative integers, output is 0. Window [3, -6] First negative integer is -6. Window [-6, 10] First negative integer is -6.
+ * Input 2:
+ * arr[] = [12, -1, -7, 8, -15, 30, 16, 28], k = 3
+ * Output 2:
+ * -1 -1 -7 -15 -15 0
+ * Explanation 2:
+ * Window [12, -1, -7] First negative integer is -1. Window [-1, -7, 8] First negative integer is -1. Window [-7, 8, -15] First negative integer is -7. Window [8, -15, 30] First negative integer is -15. Window [-15, 30, 16] First negative integer is -15. Window No negative integers, output is 0.
+ * Input 3:
+ * arr[] = [12, 1, 3, 5], k = 3
+ * Output 3:
+ * 0 0
+ * Explanation 3:
+ * Window No negative integers, output is 0. Window No negative integers, output is 0.
+ */
+
+
+#include <stdio.h>
+
+int main() {
+    int n, k;
+    printf("Enter size of array: ");
+    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+    int arr[n];
+    printf("Enter array elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter k: ");
+    if (scanf("%d", &k) != 1 || k <= 0 || k > n) return 0;
+
+    for (int i = 0; i <= n - k; i++) {
+        int first_neg = 0;
+        for (int j = 0; j < k; j++) {
+            if (arr[i + j] < 0) {
+                first_neg = arr[i + j];
+                break;
+            }
+        }
+        printf("%d", first_neg);
+        if (i < n - k) printf(" ");
+    }
+    printf("\n");
+    return 0;
+}
